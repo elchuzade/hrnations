@@ -8,4 +8,4 @@ export const GET_JOBS = 'GET_JOBS';
 export const DELETE_JOB = 'DELETE_JOB';
 export const ADD_JOB = 'ADD_JOB';
 export const EDIT_JOB = 'EDIT_JOB';
-export const JOB_LOADING = 'JOB_LOADING';
+export const JOBS_LOADING = 'JOBS_LOADING';

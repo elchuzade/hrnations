@@ -1,4 +1,4 @@
-import { GET_ERRORS, GET_RESPONSE, JOB_LOADING } from './types';
+import { GET_ERRORS, GET_RESPONSE, JOBS_LOADING } from './types';
 
 export const refreshErrors = () => {
   return {
@@ -32,7 +32,7 @@ export const setLoading = data => {
   switch (data) {
     case 'job': {
       return {
-        type: JOB_LOADING
+        type: JOBS_LOADING
       };
     }
   }

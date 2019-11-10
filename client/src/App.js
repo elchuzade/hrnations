@@ -12,8 +12,6 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Jobs from './components/jobs/Jobs';
-import Job from './components/Job';
 import NotFound from './components/layout/NotFound';
 
 // Check for token
@@ -42,8 +40,8 @@ const App = () => {
           <Switch>
             <Route exact path="/boss/register" component={Register} />
             <Route exact path="/boss/login" component={Login} />
-            <Route exact path="/jobs" component={Jobs} />
-            <Route exact path="/jobs/:id" component={Job} />
+            {/* <Route exact path="/jobs" component={Jobs} /> */}
+            {/* <Route exact path="/jobs/:id" component={Job} /> */}
             <Route path="*" component={NotFound} />
           </Switch>
           <Footer />

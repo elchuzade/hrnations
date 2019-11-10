@@ -95,7 +95,6 @@ router.put(
           foundJob.companyDescription = req.body.companyDescription;
         if (req.body.location) foundJob.location = req.body.location;
         if (req.body.description) foundJob.description = req.body.description;
-        if (req.body.deadline) foundJob.deadline = req.body.deadline;
         if (req.body.website) foundJob.website = req.body.website;
         foundJob
           .save()

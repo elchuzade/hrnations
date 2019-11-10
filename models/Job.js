@@ -46,9 +46,6 @@ const JobSchema = new Schema(
     },
     website: {
       type: String
-    },
-    deadline: {
-      type: Date
     }
   },
   { timestamps: true }
