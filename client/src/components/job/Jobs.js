@@ -50,7 +50,8 @@ class Jobs extends Component {
     const newJob = {
       title: this.state.title
     };
-    this.props.addJob(newJob);
+    newJob.title && this.props.addJob(newJob);
+    this.state.modal && this.setState({ modal: false });
   };
   render() {
     const { errors } = this.state;
@@ -96,7 +97,6 @@ class Jobs extends Component {
         <NewJobModal
           modal={this.state.modal}
           toggleModal={this.toggleModal}
-          resetModal={this.resetModal}
           submitModal={this.submitModal}
           onChange={this.onChange}
           title={this.state.title}
