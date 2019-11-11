@@ -91,8 +91,7 @@ router.put(
       .then(foundJob => {
         if (req.body.title) foundJob.title = req.body.title;
         if (req.body.companyName) foundJob.companyName = req.body.companyName;
-        if (req.body.companyDescription)
-          foundJob.companyDescription = req.body.companyDescription;
+        if (req.body.companyInfo) foundJob.companyInfo = req.body.companyInfo;
         if (req.body.location) foundJob.location = req.body.location;
         if (req.body.description) foundJob.description = req.body.description;
         if (req.body.website) foundJob.website = req.body.website;
