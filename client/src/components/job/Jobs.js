@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getJobs, addJob } from '../../actions/jobActions';
-// import JobCard from '../jobs/JobCard';
+import JobCard from './JobCard';
 
 import NewJobModal from './NewJobModal';
 
@@ -83,13 +83,11 @@ class Jobs extends Component {
             {spinner}
             {!spinner && (
               <React.Fragment>
-                <div className="row">
-                  {jobs.map(job => (
-                    <div key={job._id} className="col-12 col-lg-6 mb-3">
-                      {/* <JobCard job={job} /> */}
-                    </div>
-                  ))}
-                </div>
+                {jobs.map(job => (
+                  <div key={job._id} className="col-12 col-lg-6 mb-3">
+                    <JobCard job={job} />
+                  </div>
+                ))}
               </React.Fragment>
             )}
           </div>

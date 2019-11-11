@@ -8,6 +8,9 @@ const JobSchema = new Schema(
       type: String,
       required: true
     },
+    intro: {
+      type: String
+    },
     avatar: {
       location: {
         type: String
