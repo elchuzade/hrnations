@@ -1,7 +1,7 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
+const User = mongoose.model('user');
 const keys = require('./keys');
 
 const opts = {};
@@ -14,11 +14,7 @@ module.exports = passport => {
       User.findById(jwt_payload.id)
         .then(user => {
           if (user) {
-            if (user.status) {
-              return done(null, user);
-            } else {
-              done(null, false)
-            }
+            return done(null, user);
           } // else when no user found send false
           return done(null, false);
         })

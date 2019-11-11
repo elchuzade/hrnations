@@ -32,8 +32,7 @@ const JobSchema = new Schema(
       }
     },
     location: {
-      type: String,
-      required: true
+      type: String
     },
     description: {
       type: String

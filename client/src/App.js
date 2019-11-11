@@ -8,6 +8,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { Provider } from 'react-redux';
 import store from './store';
 
+import Jobs from './components/job/Jobs';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
@@ -40,7 +41,7 @@ const App = () => {
           <Switch>
             <Route exact path="/boss/register" component={Register} />
             <Route exact path="/boss/login" component={Login} />
-            {/* <Route exact path="/jobs" component={Jobs} /> */}
+            <Route exact path="/jobs" component={Jobs} />
             {/* <Route exact path="/jobs/:id" component={Job} /> */}
             <Route path="*" component={NotFound} />
           </Switch>

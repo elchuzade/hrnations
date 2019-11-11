@@ -60,6 +60,7 @@ export const deleteJob = id => dispatch => {
 export const addJob = job => dispatch => {
   dispatch(refreshErrors());
   dispatch(refreshResponse());
+  console.log(job);
   axios
     .post('/api/jobs', job)
     .then(res => {

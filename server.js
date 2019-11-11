@@ -21,10 +21,13 @@ const db = require('./config/keys').mongoURI;
 mongoose
   .connect(db)
   .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.log('- MongoDB Error - ', err));
 
-  // Passport middleware
+// Passport middleware
 app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
 
 // User routes
 app.use('/api/users', users);
