@@ -125,9 +125,11 @@ router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    console.log('deleting', req.params.id);
     const errors = {};
     Job.findById(req.params.id)
       .then(job => {
+        console.log('found job');
         if (job.avatar && job.avatar.key) {
           const params = {
             Bucket: job.avatar.bucket,

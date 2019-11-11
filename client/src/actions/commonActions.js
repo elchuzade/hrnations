@@ -35,5 +35,8 @@ export const setLoading = data => {
         type: JOBS_LOADING
       };
     }
+    default: {
+      return;
+    }
   }
 };

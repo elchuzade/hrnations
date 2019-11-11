@@ -75,7 +75,7 @@ export const addJob = job => dispatch => {
     });
 };
 
-export const editJob = (id, job) => dispatch => {
+export const updateJob = (id, job) => dispatch => {
   dispatch(refreshErrors());
   dispatch(refreshResponse());
   axios
