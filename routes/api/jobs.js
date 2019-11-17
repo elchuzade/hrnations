@@ -37,20 +37,16 @@ router.get('/', (req, res) => {
 // @route GET api/jobs/:id
 // @desc Get single job by id
 // @access Public
-router.get(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const errors = {};
-    Job.findById(req.params.id)
-      .then(foundJob => res.json(foundJob))
-      .catch(err => {
-        errors.job = 'Job not found';
-        console.log(err);
-        res.status(404).json(errors);
-      });
-  }
-);
+router.get('/:id', (req, res) => {
+  const errors = {};
+  Job.findById(req.params.id)
+    .then(foundJob => res.json(foundJob))
+    .catch(err => {
+      errors.job = 'Job not found';
+      console.log(err);
+      res.status(404).json(errors);
+    });
+});
 
 // @route POST api/jobs
 // @desc Post new jobs

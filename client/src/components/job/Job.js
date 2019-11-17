@@ -14,6 +14,8 @@ import 'react-quill/dist/quill.bubble.css';
 import modules from '../common/exports/QuillModules';
 import formats from '../common/exports/QuillFormats';
 
+import JobHeader from './buildingBlocks/JobHeader';
+
 class Job extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,8 @@ class Job extends Component {
       website: '',
       createdAt: '',
       errors: {},
-      editJob: false
+      editJob: false,
+      job: {}
     };
   }
 
@@ -55,7 +58,8 @@ class Job extends Component {
         companyName: nextProps.jobs.job.companyName,
         companyInfo: nextProps.jobs.job.companyInfo,
         website: nextProps.jobs.job.website,
-        createdAt: nextProps.jobs.job.createdAt
+        createdAt: nextProps.jobs.job.createdAt,
+        job: nextProps.jobs.job
       });
   }
 
@@ -107,63 +111,12 @@ class Job extends Component {
         )}
         {spinner}
         {!spinner && (
-          <div className="container">
-            <section id="jobHeader">
-              <div className="row mb-3">
-                <div className="d-none d-md-block col-md-3 col-lg-2">
-                  <img
-                    src={this.state.avatar || 'https://picsum.photos/200/200'}
-                    alt="avatar"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="col-9 col-md-6 col-lg-8">
-                  <h3>{this.state.title}</h3>
-                  <p className="lead">{this.state.companyName}</p>
-                  <p>
-                    <i>{this.state.location}</i>
-                  </p>
-                  <p>
-                    <i className="text-muted">
-                      Published on{' '}
-                      <Moment format="MMM D YYYY" withTitle>
-                        {this.state.createdAt}
-                      </Moment>
-                    </i>
-                  </p>
-                </div>
-                <div className="col-3 col-md-3 col-lg-2 text-right">
-                  <button
-                    className="btn btn-info"
-                    data-toggle="modal"
-                    data-target="#applyModal"
-                  >
-                    Apply
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section id="jobIntro">
-              <div className="row mb-3">
-                <div className="col-12">
-                  <p className="lead text-center">{this.state.intro}</p>
-                </div>
-              </div>
-            </section>
-            <section id="jobIntro">
-              <div className="row mb-3">
-                <div className="col-12">
-                  <p className="lead text-center">{this.state.description}</p>
-                </div>
-              </div>
-            </section>
-            <section id="companyInfo">
-              <div className="row">
-                <div className="col">
-                  <p className="lead text-center">{this.state.companyInfo}</p>
-                </div>
-              </div>
-            </section>
+          <div>
+            {this.state.editJob ? (
+              <div className="container"></div>
+            ) : (
+              <JobHeader job={this.state.job} />
+            )}
           </div>
         )}
       </div>
@@ -186,7 +139,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { getJob, deleteJob, updateJob }
-)(Job);
+export default connect(mapStateToProps, { getJob, deleteJob, updateJob })(Job);
