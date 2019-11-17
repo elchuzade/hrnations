@@ -125,11 +125,9 @@ router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log('deleting', req.params.id);
     const errors = {};
     Job.findById(req.params.id)
       .then(job => {
-        console.log('found job');
         if (job.avatar && job.avatar.key) {
           const params = {
             Bucket: job.avatar.bucket,
@@ -156,6 +154,21 @@ router.delete(
                 return res.status(400).json(errors);
               });
           });
+        } else {
+          job
+            .remove()
+            .then(() =>
+              res.status(200).json({
+                item: { _id: req.params.id },
+                action: 'delete',
+                message: 'Deleted job'
+              })
+            )
+            .catch(err => {
+              errors.job = 'Job can not be deleted';
+              console.log(err);
+              return res.status(400).json(errors);
+            });
         }
       })
       .catch(err => {
