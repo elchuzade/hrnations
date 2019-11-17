@@ -11,15 +11,6 @@ import {
   deleteJobAvatar
 } from '../../actions/jobActions';
 
-import Moment from 'react-moment';
-import ReactQuill from 'react-quill';
-
-import 'react-quill/dist/quill.snow.css';
-import 'react-quill/dist/quill.bubble.css';
-
-import modules from '../common/exports/QuillModules';
-import formats from '../common/exports/QuillFormats';
-
 import JobDetails from './buildingBlocks/JobDetails';
 import JobDetailsEdit from './buildingBlocks/JobDetailsEdit';
 
@@ -148,7 +139,9 @@ class Job extends Component {
       title: this.state.title,
       companyName: this.state.companyName,
       location: this.state.location,
-      intro: this.state.intro
+      intro: this.state.intro,
+      companyInfo: this.state.companyInfo,
+      description: this.state.description
     };
     this.props.updateJob(this.state._id, jobHeaderData);
   };
@@ -197,6 +190,7 @@ class Job extends Component {
                 location={this.state.location}
                 intro={this.state.intro}
                 description={this.state.description}
+                companyInfo={this.state.companyInfo}
                 onChangeQuill={this.onChangeQuill}
               />
             ) : (

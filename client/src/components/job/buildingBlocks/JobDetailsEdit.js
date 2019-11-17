@@ -5,6 +5,14 @@ import FileInputGroup from '../../common/FileInputGroup';
 import TextInput from '../../common/TextInput';
 import TextareaInput from '../../common/TextareaInput';
 
+import ReactQuill from 'react-quill';
+
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
+
+import modules from '../../common/exports/QuillModules';
+import formats from '../../common/exports/QuillFormats';
+
 class JobDetailsEdit extends Component {
   constructor(props) {
     super(props);
@@ -96,6 +104,29 @@ class JobDetailsEdit extends Component {
               onChange={this.props.onChange}
               name="intro"
               placeholder="Job Introduction"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <small className="text-muted">Description</small>
+            <ReactQuill
+              value={this.props.description}
+              onChange={this.props.onChangeQuill}
+              theme="snow"
+              modules={modules}
+              formats={formats}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <small className="text-muted">Company Info</small>
+            <TextareaInput
+              value={this.props.companyInfo || ''}
+              onChange={this.props.onChange}
+              name="companyInfo"
+              placeholder="Job Company Info"
             />
           </div>
         </div>
