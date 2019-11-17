@@ -46,7 +46,7 @@ class JobHeaderEdit extends Component {
                   >
                     Delete
                   </button>
-                  <button className="btn btn-secondary mx-2" type="submit">
+                  <button className="btn btn-success mx-2" type="submit">
                     Upload
                   </button>
                 </div>
@@ -56,6 +56,7 @@ class JobHeaderEdit extends Component {
         </div>
         <div className="row">
           <div className="col-12">
+            <small className="text-muted">Title</small>
             <TextInput
               value={this.props.title}
               onChange={this.props.onChange}
@@ -64,10 +65,35 @@ class JobHeaderEdit extends Component {
             />
           </div>
         </div>
+        <div className="row">
+          <div className="col-12">
+            <small className="text-muted">Company Name</small>
+            <TextInput
+              value={this.props.companyName}
+              onChange={this.props.onChange}
+              name="companyName"
+              placeholder="Job Company Name"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <small className="text-muted">Location</small>
+            <TextInput
+              value={this.props.location}
+              onChange={this.props.onChange}
+              name="location"
+              placeholder="Job Location"
+            />
+          </div>
+        </div>
         <div className="row mt-2 mb-5">
           <div className="col text-center">
-            <button className="btn btn-secondary mx-2"onClick={this.props.onSubmitHeader}>
-              Upload
+            <button
+              className="btn btn-success mx-2"
+              onClick={this.props.onSubmitHeader}
+            >
+              Update
             </button>
           </div>
         </div>
@@ -84,7 +110,7 @@ JobHeaderEdit.propTypes = {
   errors: PropTypes.object.isRequired,
   onDeleteJobAvatar: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  onSubmitHeader: PropTypes.func.isRequired,
+  onSubmitHeader: PropTypes.func.isRequired
 };
 
 export default JobHeaderEdit;
