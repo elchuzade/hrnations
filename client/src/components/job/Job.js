@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import JobDashboard from './JobDashboard';
 
-import { getJob, updateJob, deleteJob } from '../../actions/jobActions';
+import {
+  getJob,
+  updateJob,
+  deleteJob,
+  uploadJobAvatar,
+  deleteJobAvatar
+} from '../../actions/jobActions';
 
 import Moment from 'react-moment';
 import ReactQuill from 'react-quill';
@@ -15,6 +21,7 @@ import modules from '../common/exports/QuillModules';
 import formats from '../common/exports/QuillFormats';
 
 import JobHeader from './buildingBlocks/JobHeader';
+import JobHeaderEdit from './buildingBlocks/JobHeaderEdit';
 
 class Job extends Component {
   constructor(props) {
@@ -32,8 +39,7 @@ class Job extends Component {
       website: '',
       createdAt: '',
       errors: {},
-      editJob: false,
-      job: {}
+      editJob: false
     };
   }
 
@@ -58,8 +64,7 @@ class Job extends Component {
         companyName: nextProps.jobs.job.companyName,
         companyInfo: nextProps.jobs.job.companyInfo,
         website: nextProps.jobs.job.website,
-        createdAt: nextProps.jobs.job.createdAt,
-        job: nextProps.jobs.job
+        createdAt: nextProps.jobs.job.createdAt
       });
   }
 
@@ -85,6 +90,46 @@ class Job extends Component {
   deleteJob = e => {
     e.preventDefault();
     this.props.deleteJob(this.state._id);
+  };
+
+  onChangeJobAvatar = e => {
+    e.preventDefault();
+    this.setState({ avatarObject: e.target.files[0] });
+    if (this.state.errors && this.state.errors.avatar) {
+      let updatedErrors = this.state.errors;
+      delete updatedErrors.avatar;
+      this.setState({ errors: updatedErrors });
+    }
+  };
+
+  onSubmitJobAvatar = e => {
+    e.preventDefault();
+    if (this.state.avatarObject.name) {
+      const formData = new FormData();
+      formData.append('jobAvatar', this.state.avatarObject);
+      let configData = {
+        headers: {
+          'content-type': 'multipart/form/data'
+        }
+      };
+      this.props.uploadJobAvatar(formData, configData, this.state._id);
+    } else {
+      let updatedErrors = this.state.errors;
+      updatedErrors.avatar = 'Choose image to upload';
+      this.setState({ errors: updatedErrors });
+    }
+  };
+
+  onDeleteJobAvatar = e => {
+    e.preventDefault();
+    if (this.state.avatarObject.name || this.props.jobs.job.avatar) {
+      this.props.deleteJobAvatar(this.state._id);
+      this.setState({ avatarObject: {}, avatar: '' });
+    } else {
+      let updatedErrors = this.state.errors;
+      updatedErrors.avatar = 'No image to delete';
+      this.setState({ errors: updatedErrors });
+    }
   };
 
   render() {
@@ -113,9 +158,16 @@ class Job extends Component {
         {!spinner && (
           <div>
             {this.state.editJob ? (
-              <div className="container"></div>
+              <JobHeaderEdit
+                job={this.props.jobs.job}
+                onSubmitJobAvatar={this.onSubmitJobAvatar}
+                onChangeJobAvatar={this.onChangeJobAvatar}
+                onDeleteJobAvatar={this.onDeleteJobAvatar}
+                errors={errors}
+                avatarObject={this.state.avatarObject}
+              />
             ) : (
-              <JobHeader job={this.state.job} />
+              <JobHeader job={this.props.jobs.job} />
             )}
           </div>
         )}
@@ -130,7 +182,9 @@ Job.propTypes = {
   jobs: PropTypes.object.isRequired,
   getJob: PropTypes.func.isRequired,
   deleteJob: PropTypes.func.isRequired,
-  updateJob: PropTypes.func.isRequired
+  updateJob: PropTypes.func.isRequired,
+  uploadJobAvatar: PropTypes.func.isRequired,
+  deleteJobAvatar: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -139,4 +193,10 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { getJob, deleteJob, updateJob })(Job);
+export default connect(mapStateToProps, {
+  getJob,
+  deleteJob,
+  updateJob,
+  deleteJobAvatar,
+  uploadJobAvatar
+})(Job);
