@@ -132,6 +132,26 @@ class Job extends Component {
     }
   };
 
+  onChange = e => {
+    e.preventDefault();
+    let errorsUpdate = {};
+    if (this.state.errors[`${e.target.name}`]) {
+      errorsUpdate = this.state.errors;
+      delete errorsUpdate[`${e.target.name}`];
+    }
+    this.setState({ [e.target.name]: e.target.value, errors: errorsUpdate });
+  };
+
+  onSubmitHeader = e => {
+    e.preventDefault();
+    const jobHeaderData = {
+      title: this.state.title,
+      companyName: this.state.companyName,
+      location: this.state.location
+    };
+    this.props.updateJob(this.state._id, jobHeaderData);
+  };
+
   render() {
     const { errors } = this.state;
     const { isAuthenticated } = this.props.auth;
@@ -165,6 +185,11 @@ class Job extends Component {
                 onDeleteJobAvatar={this.onDeleteJobAvatar}
                 errors={errors}
                 avatarObject={this.state.avatarObject}
+                onChange={this.onChange}
+                onSubmitHeader={this.onSubmitHeader}
+                title={this.state.title}
+                companyName={this.state.companyName}
+                location={this.state.location}
               />
             ) : (
               <JobHeader job={this.props.jobs.job} />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import FileInputGroup from '../../common/FileInputGroup';
+import TextInput from '../../common/TextInput';
 
 class JobHeaderEdit extends Component {
   constructor(props) {
@@ -22,7 +23,11 @@ class JobHeaderEdit extends Component {
               alt="image"
               className="img-fluid"
             />
-            <form onSubmit={e => this.props.onSubmitJobAvatar(e, this.props.job._id)}>
+            <form
+              onSubmit={e =>
+                this.props.onSubmitJobAvatar(e, this.props.job._id)
+              }
+            >
               <FileInputGroup
                 name="jobAvatar"
                 placeholder="Job Image"
@@ -35,7 +40,9 @@ class JobHeaderEdit extends Component {
                 <div className="col text-center">
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={e => this.props.onDeleteJobAvatar(e, this.props.job._id)}
+                    onClick={e =>
+                      this.props.onDeleteJobAvatar(e, this.props.job._id)
+                    }
                   >
                     Delete
                   </button>
@@ -45,6 +52,23 @@ class JobHeaderEdit extends Component {
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <TextInput
+              value={this.props.title}
+              onChange={this.props.onChange}
+              name="title"
+              placeholder="Job Title"
+            />
+          </div>
+        </div>
+        <div className="row mt-2 mb-5">
+          <div className="col text-center">
+            <button className="btn btn-secondary mx-2"onClick={this.props.onSubmitHeader}>
+              Upload
+            </button>
           </div>
         </div>
       </div>
@@ -58,7 +82,9 @@ JobHeaderEdit.propTypes = {
   onChangeJobAvatar: PropTypes.func.isRequired,
   avatarObject: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  onDeleteJobAvatar: PropTypes.func.isRequired, 
+  onDeleteJobAvatar: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmitHeader: PropTypes.func.isRequired,
 };
 
 export default JobHeaderEdit;
