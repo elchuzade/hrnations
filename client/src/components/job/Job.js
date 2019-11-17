@@ -20,8 +20,8 @@ import 'react-quill/dist/quill.bubble.css';
 import modules from '../common/exports/QuillModules';
 import formats from '../common/exports/QuillFormats';
 
-import JobHeader from './buildingBlocks/JobHeader';
-import JobHeaderEdit from './buildingBlocks/JobHeaderEdit';
+import JobDetails from './buildingBlocks/JobDetails';
+import JobDetailsEdit from './buildingBlocks/JobDetailsEdit';
 
 class Job extends Component {
   constructor(props) {
@@ -147,9 +147,14 @@ class Job extends Component {
     const jobHeaderData = {
       title: this.state.title,
       companyName: this.state.companyName,
-      location: this.state.location
+      location: this.state.location,
+      intro: this.state.intro
     };
     this.props.updateJob(this.state._id, jobHeaderData);
+  };
+
+  onChangeQuill = (content, delta, source, value) => {
+    this.setState({ description: value.getHTML() });
   };
 
   render() {
@@ -178,7 +183,7 @@ class Job extends Component {
         {!spinner && (
           <div>
             {this.state.editJob ? (
-              <JobHeaderEdit
+              <JobDetailsEdit
                 job={this.props.jobs.job}
                 onSubmitJobAvatar={this.onSubmitJobAvatar}
                 onChangeJobAvatar={this.onChangeJobAvatar}
@@ -190,9 +195,12 @@ class Job extends Component {
                 title={this.state.title}
                 companyName={this.state.companyName}
                 location={this.state.location}
+                intro={this.state.intro}
+                description={this.state.description}
+                onChangeQuill={this.onChangeQuill}
               />
             ) : (
-              <JobHeader job={this.props.jobs.job} />
+              <JobDetails job={this.props.jobs.job} />
             )}
           </div>
         )}

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import FileInputGroup from '../../common/FileInputGroup';
 import TextInput from '../../common/TextInput';
+import TextareaInput from '../../common/TextareaInput';
 
-class JobHeaderEdit extends Component {
+class JobDetailsEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -87,6 +88,17 @@ class JobHeaderEdit extends Component {
             />
           </div>
         </div>
+        <div className="row">
+          <div className="col-12">
+            <small className="text-muted">Introduction</small>
+            <TextareaInput
+              value={this.props.intro || ''}
+              onChange={this.props.onChange}
+              name="intro"
+              placeholder="Job Introduction"
+            />
+          </div>
+        </div>
         <div className="row mt-2 mb-5">
           <div className="col text-center">
             <button
@@ -102,7 +114,7 @@ class JobHeaderEdit extends Component {
   }
 }
 
-JobHeaderEdit.propTypes = {
+JobDetailsEdit.propTypes = {
   job: PropTypes.object.isRequired,
   onSubmitJobAvatar: PropTypes.func.isRequired,
   onChangeJobAvatar: PropTypes.func.isRequired,
@@ -110,7 +122,8 @@ JobHeaderEdit.propTypes = {
   errors: PropTypes.object.isRequired,
   onDeleteJobAvatar: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  onSubmitHeader: PropTypes.func.isRequired
+  onSubmitHeader: PropTypes.func.isRequired,
+  onChangeQuill: PropTypes.func.isRequired
 };
 
-export default JobHeaderEdit;
+export default JobDetailsEdit;

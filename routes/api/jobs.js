@@ -86,6 +86,7 @@ router.put(
     Job.findById(req.params.id)
       .then(foundJob => {
         if (req.body.title) foundJob.title = req.body.title;
+        if (req.body.intro) foundJob.intro = req.body.intro;
         if (req.body.companyName) foundJob.companyName = req.body.companyName;
         if (req.body.companyInfo) foundJob.companyInfo = req.body.companyInfo;
         if (req.body.location) foundJob.location = req.body.location;

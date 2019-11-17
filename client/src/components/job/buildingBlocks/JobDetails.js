@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-const JobHeader = ({ job }) => {
+const JobDetails = ({ job }) => {
   return (
     <div className="container">
       <section id="jobHeader">
@@ -73,8 +73,8 @@ const JobHeader = ({ job }) => {
   );
 };
 
-JobHeader.propTypes = {
+JobDetails.propTypes = {
   job: PropTypes.object.isRequired
 };
 
-export default JobHeader;
+export default JobDetails;
