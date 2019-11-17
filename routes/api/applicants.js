@@ -3,6 +3,8 @@ const router = express.Router();
 const passport = require('passport');
 const Applicant = require('../../models/Applicant');
 
+const validateApplicantInput = require('../../validation/applicants');
+
 // @route GET api/applicants
 // @desc Get all applicants
 // @access Public
@@ -35,6 +37,7 @@ router.post('/', (req, res) => {
   }
 
   const applicant = {};
+  if (req.body.job) applicant.job = req.body.job;
   if (req.body.name) applicant.name = req.body.name;
   if (req.body.email) applicant.email = req.body.email;
   if (req.body.note) applicant.note = req.body.note;

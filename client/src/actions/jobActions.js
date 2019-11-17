@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { GET_JOBS, GET_JOB, DELETE_JOB, ADD_JOB, EDIT_JOB } from './types';
+import {
+  GET_JOBS,
+  GET_JOB,
+  DELETE_JOB,
+  ADD_JOB,
+  EDIT_JOB,
+  ADD_APPLICANT
+} from './types';
 import {
   refreshErrors,
   refreshResponse,
@@ -115,6 +122,23 @@ export const deleteJobAvatar = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_JOB,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(getError(err.response.data));
+    });
+};
+
+export const addApplicant = applicant => dispatch => {
+  dispatch(refreshErrors());
+  dispatch(refreshResponse());
+  axios
+    .post('/api/applicants', applicant)
+    .then(res => {
+      dispatch(getResponse(res.data));
+      dispatch({
+        type: ADD_APPLICANT,
         payload: res.data
       });
     })

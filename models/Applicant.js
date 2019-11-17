@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const ApplicantSchema = new Schema(
   {
+    job: {
+      type: String,
+      required: true
+    },
     name: {
       type: String,
       required: true

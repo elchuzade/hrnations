@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getJobs, addJob } from '../../actions/jobActions';
 import JobCard from './JobCard';
 
-import NewJobModal from './NewJobModal';
+import NewJobModal from './buildingBlocks/NewJobModal';
 
 class Jobs extends Component {
   constructor(props) {

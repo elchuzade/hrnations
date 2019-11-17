@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-const JobDetails = ({ job }) => {
+const JobDetails = ({ job, openModal }) => {
   return (
     <div className="container">
       <section id="jobHeader">
@@ -34,11 +34,7 @@ const JobDetails = ({ job }) => {
             </p>
           </div>
           <div className="col-3 col-md-3 col-lg-2 text-right">
-            <button
-              className="btn btn-info"
-              data-toggle="modal"
-              data-target="#applyModal"
-            >
+            <button className="btn btn-info" onClick={openModal}>
               Apply
             </button>
           </div>
@@ -74,7 +70,8 @@ const JobDetails = ({ job }) => {
 };
 
 JobDetails.propTypes = {
-  job: PropTypes.object.isRequired
+  job: PropTypes.object.isRequired,
+  openModal: PropTypes.func.isRequired
 };
 
 export default JobDetails;

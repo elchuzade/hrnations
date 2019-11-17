@@ -8,11 +8,13 @@ import {
   updateJob,
   deleteJob,
   uploadJobAvatar,
-  deleteJobAvatar
+  deleteJobAvatar,
+  addApplicant
 } from '../../actions/jobActions';
 
 import JobDetails from './buildingBlocks/JobDetails';
 import JobDetailsEdit from './buildingBlocks/JobDetailsEdit';
+import NewApplicantModal from './buildingBlocks/NewApplicantModal';
 
 class Job extends Component {
   constructor(props) {
@@ -30,7 +32,12 @@ class Job extends Component {
       website: '',
       createdAt: '',
       errors: {},
-      editJob: false
+      editJob: false,
+      modal: false,
+      applicantName: '',
+      applicantEmail: '',
+      applicantNote: '',
+      applicantLinkedin: ''
     };
   }
 
@@ -58,6 +65,53 @@ class Job extends Component {
         createdAt: nextProps.jobs.job.createdAt
       });
   }
+
+  toggleModal = e => {
+    e && e.preventDefault();
+    if (this.state.modal) {
+      this.setState({
+        modal: false,
+        applicantName: '',
+        applicantEmail: '',
+        applicantLinkedin: '',
+        applicantNote: ''
+      });
+    }
+  };
+  openModal = e => {
+    e.preventDefault();
+    if (!this.state.modal) {
+      this.setState({ modal: true });
+    }
+  };
+  submitModal = e => {
+    e.preventDefault();
+    const newApplicant = {
+      job: this.state._id,
+      name: this.state.applicantName,
+      email: this.state.applicantEmail,
+      linkedin: this.state.applicantLinkedin,
+      note: this.state.applicantNote
+    };
+    if (
+      newApplicant.job &&
+      newApplicant.name &&
+      newApplicant.email &&
+      this.state.modal
+    ) {
+      this.props.addApplicant(newApplicant);
+      this.setState({ modal: false });
+    } else {
+      let errors = this.state.errors;
+      if (!newApplicant.name) {
+        errors.name = 'Name is required';
+      }
+      if (!newApplicant.email) {
+        errors.email = 'Email is required';
+      }
+      this.setState({ errors: errors });
+    }
+  };
 
   toggleEdit = e => {
     e.preventDefault();
@@ -194,10 +248,25 @@ class Job extends Component {
                 onChangeQuill={this.onChangeQuill}
               />
             ) : (
-              <JobDetails job={this.props.jobs.job} />
+              <JobDetails
+                job={this.props.jobs.job}
+                openModal={this.openModal}
+              />
             )}
           </div>
         )}
+        {/* MODAL */}
+        <NewApplicantModal
+          modal={this.state.modal}
+          toggleModal={this.toggleModal}
+          submitModal={this.submitModal}
+          onChange={this.onChange}
+          applicantName={this.state.applicantName}
+          applicantEmail={this.state.applicantEmail}
+          applicantLinkedin={this.state.applicantLinkedin}
+          applicantNote={this.state.applicantNote}
+          errors={errors}
+        />
       </div>
     );
   }
@@ -211,7 +280,8 @@ Job.propTypes = {
   deleteJob: PropTypes.func.isRequired,
   updateJob: PropTypes.func.isRequired,
   uploadJobAvatar: PropTypes.func.isRequired,
-  deleteJobAvatar: PropTypes.func.isRequired
+  deleteJobAvatar: PropTypes.func.isRequired,
+  addApplicant: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -225,5 +295,6 @@ export default connect(mapStateToProps, {
   deleteJob,
   updateJob,
   deleteJobAvatar,
-  uploadJobAvatar
+  uploadJobAvatar,
+  addApplicant
 })(Job);

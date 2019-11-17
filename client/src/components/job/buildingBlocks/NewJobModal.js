@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import TextInput from '../common/TextInput';
+import TextInput from '../../common/TextInput';
 
 const NewJobModal = ({
   modal,
