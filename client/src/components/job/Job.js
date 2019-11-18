@@ -239,12 +239,12 @@ class Job extends Component {
                 avatarObject={this.state.avatarObject}
                 onChange={this.onChange}
                 onSubmitHeader={this.onSubmitHeader}
-                title={this.state.title}
-                companyName={this.state.companyName}
-                location={this.state.location}
-                intro={this.state.intro}
-                description={this.state.description}
-                companyInfo={this.state.companyInfo}
+                title={this.state.title || ''}
+                companyName={this.state.companyName || ''}
+                location={this.state.location || ''}
+                intro={this.state.intro || ''}
+                description={this.state.description || ''}
+                companyInfo={this.state.companyInfo || ''}
                 onChangeQuill={this.onChangeQuill}
               />
             ) : (

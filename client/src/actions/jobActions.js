@@ -5,7 +5,8 @@ import {
   DELETE_JOB,
   ADD_JOB,
   EDIT_JOB,
-  ADD_APPLICANT
+  ADD_APPLICANT,
+  GET_APPLICANTS
 } from './types';
 import {
   refreshErrors,
@@ -139,6 +140,23 @@ export const addApplicant = applicant => dispatch => {
       dispatch(getResponse(res.data));
       dispatch({
         type: ADD_APPLICANT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(getError(err.response.data));
+    });
+};
+
+export const getApplicants = () => dispatch => {
+  dispatch(setLoading('applicant'));
+  dispatch(refreshErrors());
+  axios
+    .get('/api/applicants')
+    .then(res => {
+      dispatch(getResponse(res.data));
+      dispatch({
+        type: GET_APPLICANTS,
         payload: res.data
       });
     })

@@ -69,12 +69,14 @@ class Jobs extends Component {
           <div className="container">
             <div className="row bg-info mb-3 py-1">
               <div className="col d-flex align-items-center justify-content-center">
-                <button
-                  className=" btn btn-light py-1"
-                  onClick={this.openModal}
-                >
-                  <i className="fas fa-plus"></i>
-                </button>
+                {isAuthenticated && (
+                  <button
+                    className=" btn btn-light py-1"
+                    onClick={this.openModal}
+                  >
+                    <i className="fas fa-plus"></i>
+                  </button>
+                )}
                 <span className="h4 text-white mx-4 mb-0">VACANCIES</span>
                 <h3 className="m-0 p-0 d-flex align-items-center">
                   <span className="badge badge-light ml-0">7</span>
@@ -121,7 +123,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { getJobs, addJob }
-)(Jobs);
+export default connect(mapStateToProps, { getJobs, addJob })(Jobs);

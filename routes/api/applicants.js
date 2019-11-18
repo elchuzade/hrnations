@@ -13,7 +13,7 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const errors = {};
-    Applicants.find()
+    Applicant.find()
       .sort({ createdAt: -1 })
       .then(allApplicants => {
         res.json(allApplicants);

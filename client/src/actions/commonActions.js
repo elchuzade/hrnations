@@ -1,4 +1,9 @@
-import { GET_ERRORS, GET_RESPONSE, JOBS_LOADING } from './types';
+import {
+  GET_ERRORS,
+  GET_RESPONSE,
+  JOBS_LOADING,
+  APPLICANTS_LOADING
+} from './types';
 
 export const refreshErrors = () => {
   return {
@@ -33,6 +38,11 @@ export const setLoading = data => {
     case 'job': {
       return {
         type: JOBS_LOADING
+      };
+    }
+    case 'applicant': {
+      return {
+        type: APPLICANTS_LOADING
       };
     }
     default: {

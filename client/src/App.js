@@ -8,6 +8,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { Provider } from 'react-redux';
 import store from './store';
 
+import Applicants from './components/job/Applicants';
 import Jobs from './components/job/Jobs';
 import Job from './components/job/Job';
 import Navbar from './components/layout/Navbar';
@@ -44,6 +45,7 @@ const App = () => {
             <Route exact path="/boss/login" component={Login} />
             <Route exact path="/jobs" component={Jobs} />
             <Route exact path="/jobs/:id" component={Job} />
+            <Route exact path="/applicants" component={Applicants} />
             <Route path="*" component={NotFound} />
           </Switch>
           <Footer />

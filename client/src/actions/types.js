@@ -10,4 +10,6 @@ export const ADD_JOB = 'ADD_JOB';
 export const EDIT_JOB = 'EDIT_JOB';
 export const JOBS_LOADING = 'JOBS_LOADING';
 
-export const ADD_APPLICANT = 'ADD_APPLICANT'
+export const ADD_APPLICANT = 'ADD_APPLICANT';
+export const GET_APPLICANTS = 'GET_APPLICANTS';
+export const APPLICANTS_LOADING = 'APPLICANTS_LOADING';
